@@ -1,0 +1,23 @@
+// protos to represent rapl/powercap measurements
+//
+// https://www.kernel.org/doc/html/latest/power/powercap/powercap.html
+syntax = "proto2";
+
+package smaragdine.protos.sample;
+
+option java_multiple_files = true;
+option java_package = "smaragdine.protos.sample";
+
+message RaplReading {
+  required uint32 socket = 1;
+  // the energy components are in microjoules (accumulated counts)
+  optional uint64 cpu = 2;
+  optional uint64 package = 3;
+  optional uint64 dram = 4;
+  optional uint64 gpu = 5;
+}
+
+message RaplSample {
+  required uint64 timestamp = 1;
+  repeated RaplReading reading = 2;
+}

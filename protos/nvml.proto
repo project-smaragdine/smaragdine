@@ -1,0 +1,22 @@
+// protos to represent measurements made with the nvidia smi
+//
+// https://developer.nvidia.com/nvidia-system-management-interface
+syntax = "proto2";
+
+package smaragdine.protos.sample;
+
+option java_multiple_files = true;
+option java_package = "smaragdine.protos.sample";
+
+message NvmlReading {
+  // serial string that identifies the device on the system
+  required uint32 index = 3;
+  required string bus_id = 1;
+  // power usage in milliwatts so we don't need to use a float
+  optional uint32 power_usage = 2;
+}
+
+message NvmlSample {
+  required uint64 timestamp = 1;
+  repeated NvmlReading reading = 2;
+}

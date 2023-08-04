@@ -1,0 +1,38 @@
+// service that controls smaragdine sampling and asks for data
+syntax = "proto2";
+
+package smaragdine.protos.sample;
+
+import "protos/sample.proto";
+
+option java_multiple_files = true;
+option java_package = "smaragdine.protos.sampler";
+
+service Sampler {
+  rpc Start (StartRequest) returns (StartResponse) {}
+
+  rpc Stop (StopRequest) returns (StopResponse) {}
+
+  rpc Read (ReadRequest) returns (ReadResponse) {}
+}
+
+message StartRequest {
+  optional uint64 pid = 1;
+  optional uint64 period = 2;
+}
+
+message StartResponse {}
+
+message StopRequest {
+  optional uint64 pid = 1;
+}
+
+message StopResponse {}
+
+message ReadRequest {
+  optional uint64 pid = 1;
+}
+
+message ReadResponse {
+  optional DataSet data = 1;
+}

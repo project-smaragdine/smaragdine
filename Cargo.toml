@@ -1,0 +1,26 @@
+[package]
+name = "smaragdine"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+clap = "2.33.3"
+ctrlc = "3"
+env_logger = "0.9.0"
+log = "0.4"
+
+procfs = "0.10.1"
+nvml-wrapper = "0.7.0"
+
+bytes = "1.1.0"
+prost = "0.9"
+prost-types = "0.9"
+tonic = "0.6.2"
+tokio = {version = "1.0", features = ["rt-multi-thread"]}
+
+[build-dependencies]
+tonic-build = "0.6.2"
+
+[[bin]]
+name = "client"
+path = "src/client.rs"

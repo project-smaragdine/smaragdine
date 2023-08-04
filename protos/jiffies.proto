@@ -1,0 +1,45 @@
+// protos to represent the jiffies timesharing objects
+//
+// the messages here represent the fields for /proc/stat and
+// /proc/[pid]/stat to track application behavior by cpu location
+//
+// refer to https://man7.org/linux/man-pages/man5/proc.5.html
+syntax = "proto2";
+
+package smaragdine.protos.sample;
+
+option java_multiple_files = true;
+option java_package = "smaragdine.protos.sample";
+
+message CpuReading {
+  required uint32 cpu = 1;
+  required uint32 socket = 12;
+  optional uint32 user = 2;
+  optional uint32 nice = 3;
+  optional uint32 system = 4;
+  optional uint32 idle = 5;
+  optional uint32 iowait = 6;
+  optional uint32 irq = 7;
+  optional uint32 softirq = 8;
+  optional uint32 steal = 9;
+  optional uint32 guest = 10;
+  optional uint32 guest_nice = 11;
+}
+
+message CpuSample {
+  required uint64 timestamp = 1;
+  repeated CpuReading reading = 2;
+}
+
+message TaskReading {
+  required uint32 task_id = 1;
+  optional string name = 2;
+  required uint32 cpu = 3;
+  optional uint32 user = 4;
+  optional uint32 system = 5;
+}
+
+message ProcessSample {
+  required uint64 timestamp = 1;
+  repeated TaskReading reading = 2;
+}
